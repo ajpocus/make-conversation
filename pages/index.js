@@ -1,13 +1,20 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import Head from "next/head"
 import Image from "next/image"
-import { Formik, Field, Form } from "formik";
+import { useForm } from "react-hook-form";
 
 import styles from "~/styles/Home.module.css"
 
 export default function Home() {
   const [state, setState] = useState({});
   const [activeNPC, setActiveNPC] = useState(null);
+  const { register, handleSubmit, reset, formState: { isSubmitSuccessful } } = useForm();
+
+  useEffect(() => { 
+    if (isSubmitSuccessful) {
+      reset({ name: "" });
+    }
+  }, [isSubmitSuccessful, reset]);
 
   const makeLua = useCallback(() => {
     // Code from https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
@@ -15,7 +22,9 @@ export default function Home() {
     const fileContents = JSON.stringify(state, false, 2)
       .replace(/"(\w+)":/g, "$1 =")
       .replace(/\[/g, "{")
-      .replace(/\]/g, "}");
+      .replace(/\]/g, "}")
+      .replace(/null/g, "nil")
+      .replace(/undefined/g, "nil");
     const file = new Blob([fileContents], { type: "text/plain" });
     const filename = "dialogue.lua";
 
@@ -47,21 +56,22 @@ export default function Home() {
     <div className={styles.root}>
       <Head>
         <title>make-conversation</title>
-        <meta name="description" content="Create a conversation tree as a Lua data structure for Adventure Kit" />
+        <meta name="description" content="Create conversation trees as a Lua data structure for Adventure Kit" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <header className={styles.header}>
         <h1 className={styles.title}>
           make-conversation
         </h1>
+      </header>
 
+      <main className={styles.main}>
         <div className={styles.addNPC}>
-          <Formik
-            initialValues={{ name: "" }}
-            onSubmit={addNPC}>
-          
-          </Formik>
+          <form onSubmit={handleSubmit(addNPC)}>
+            <input {...register("name")} />
+            <button type="submit">Create</button>
+          </form>
         </div>
 
         {
