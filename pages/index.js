@@ -4,6 +4,7 @@ import Image from "next/image"
 
 import useDialogue from "~/hooks/useDialogue"
 import NPCForm from "~/components/NPCForm"
+import DialogueTree from "~/components/DialogueTree"
 import styles from "~/styles/Home.module.css"
 
 export default function Home() {
@@ -51,22 +52,35 @@ export default function Home() {
         <h1 className={styles.title}>
           make-conversation
         </h1>
+        <button className={styles.downloadBtn} onClick={makeLua}>Download</button>
       </header>
 
       <main className={styles.main}>
-        <NPCForm />
+        <div className={styles.npcs}>
+          <NPCForm />
+
+          <div className={styles.npcList}>
+            {
+              state && Object.keys(state).length ? (
+                Object.entries(state).map(([npcName, npc]) => (
+                  <div key={npcName} className={styles.npc} onClick={() => setActiveNPC(npcName)}>
+                    {npcName}
+                  </div>
+                ))
+              ) : (
+                <p>Create an NPC to continue</p>
+              )
+            }
+          </div>
+        </div>
 
         {
-          state && Object.keys(state).length ? (
-            <div className={styles.state}>
-              {Object.entries(state).map(([npcName, npc]) => (
-                <div key={npcName} className={styles.npc}>
-                  {npcName}
-                </div>
-              ))}
-            </div>
+          activeNPC ? (
+            <DialogueTree activeNPC={activeNPC} />
           ) : (
-            <div className={styles.empty}>Create an NPC to continue</div>
+            state && Object.keys(state).length && (
+              <p>Click an NPC to start</p>
+            ) || null
           )
         }
       </main>
