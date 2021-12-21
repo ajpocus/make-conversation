@@ -1,17 +1,15 @@
 import { useState, useCallback } from "react"
 import Head from "next/head"
 import Image from "next/image"
+import { Formik, Field, Form } from "formik";
 
 import styles from "~/styles/Home.module.css"
 
 export default function Home() {
-  const [state, setState] = useState(null);
+  const [state, setState] = useState({});
+  const [activeNPC, setActiveNPC] = useState(null);
 
   const makeLua = useCallback(() => {
-    if (state === null) {
-      alert("Please create at least one quest first!");
-    }
-
     // Code from https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
     // Licensed under CC-BY-SA 4.0
     const fileContents = JSON.stringify(state, false, 2)
@@ -38,8 +36,15 @@ export default function Home() {
     }
   }, [state]);
 
+  const addNPC = useCallback(({ name }) => {
+    setState({
+      ...state,
+      [name]: {}
+    });
+  }, [state, setState])
+
   return (
-    <div className={styles.container}>
+    <div className={styles.root}>
       <Head>
         <title>make-conversation</title>
         <meta name="description" content="Create a conversation tree as a Lua data structure for Adventure Kit" />
@@ -51,53 +56,31 @@ export default function Home() {
           make-conversation
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div className={styles.addNPC}>
+          <Formik
+            initialValues={{ name: "" }}
+            onSubmit={addNPC}>
+          
+          </Formik>
         </div>
+
+        {
+          Object.keys(state).length ? (
+            <div className={styles.state}>
+              {Object.entries(state).map(([npcName, npc]) => (
+                <div key={npcName} className={styles.npc}>
+                  {npcName}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.empty}>Create an NPC to continue</div>
+          )
+        }
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
+        &copy; Copyright 2021 Austin Pocus
       </footer>
     </div>
   )
