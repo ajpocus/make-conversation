@@ -1,8 +1,41 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '~/styles/Home.module.css'
 
 export default function Home() {
+  const [state, setState] = useState(null);
+
+  const makeLua = useCallback(() => {
+    if (state === null) {
+      alert("Please create at least one quest first!");
+    }
+
+    // Code from https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
+    // Licensed under CC-BY-SA 4.0
+    const fileContents = JSON.stringify(state, false, 2)
+      .replace(/"(\w+)":/g, "$1 =")
+      .replace(/\[/g, "{")
+      .replace(/\]/g, "}");
+    const file = new Blob([fileContents], { type: "text/plain" });
+    const filename = "dialogue.lua";
+
+    if (window.navigator.msSaveOrOpenBlob) { // IE10+
+      window.navigator.msSaveOrOpenBlob(file, filename);
+    } else { // Others
+      let a = document.createElement("a");
+      const url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+
+      setTimeout(() => {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);  
+      }, 0);
+    }
+  }, [state]);
+
   return (
     <div className={styles.container}>
       <Head>
