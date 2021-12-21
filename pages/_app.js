@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import { DialogueContextProvider } from "~/hooks/useDialogue"
+import "~/styles/globals.css"
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <DialogueContextProvider>
+      <Component {...pageProps} />
+    </DialogueContextProvider>
+  );
 }
 
 export default MyApp

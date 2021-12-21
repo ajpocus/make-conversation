@@ -1,20 +1,14 @@
 import { useState, useCallback, useEffect } from "react"
 import Head from "next/head"
 import Image from "next/image"
-import { useForm } from "react-hook-form";
 
+import useDialogue from "~/hooks/useDialogue"
+import NPCForm from "~/components/NPCForm"
 import styles from "~/styles/Home.module.css"
 
 export default function Home() {
-  const [state, setState] = useState({});
+  const { state, setState } = useDialogue();
   const [activeNPC, setActiveNPC] = useState(null);
-  const { register, handleSubmit, reset, formState: { isSubmitSuccessful } } = useForm();
-
-  useEffect(() => { 
-    if (isSubmitSuccessful) {
-      reset({ name: "" });
-    }
-  }, [isSubmitSuccessful, reset]);
 
   const makeLua = useCallback(() => {
     // Code from https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
@@ -45,13 +39,6 @@ export default function Home() {
     }
   }, [state]);
 
-  const addNPC = useCallback(({ name }) => {
-    setState({
-      ...state,
-      [name]: {}
-    });
-  }, [state, setState])
-
   return (
     <div className={styles.root}>
       <Head>
@@ -67,15 +54,10 @@ export default function Home() {
       </header>
 
       <main className={styles.main}>
-        <div className={styles.addNPC}>
-          <form onSubmit={handleSubmit(addNPC)}>
-            <input {...register("name")} />
-            <button type="submit">Create</button>
-          </form>
-        </div>
+        <NPCForm />
 
         {
-          Object.keys(state).length ? (
+          state && Object.keys(state).length ? (
             <div className={styles.state}>
               {Object.entries(state).map(([npcName, npc]) => (
                 <div key={npcName} className={styles.npc}>
