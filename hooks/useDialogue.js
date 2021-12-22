@@ -4,10 +4,13 @@ export const DialogueContext = createContext({});
 
 export const DialogueContextProvider = ({ children }) => {
   const [state, setState] = useState({});
+  const [activeOption, setActiveOption] = useState(null);
 
   const value = {
     state,
-    setState
+    setState,
+    activeOption,
+    setActiveOption
   }
 
   return (
