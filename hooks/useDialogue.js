@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback
+} from "react";
 
 export const DialogueContext = createContext({});
 
@@ -7,7 +13,7 @@ export const DialogueContextProvider = ({ children }) => {
   const [activePath, setActivePath] = useState(null);
 
   const isActiveOption = useCallback((keys) => {
-    return keys.every((key, idx) => {
+    return activePath?.length && keys.every((key, idx) => {
       return activePath[idx] === key;
     });
   }, [activePath]);
@@ -15,8 +21,9 @@ export const DialogueContextProvider = ({ children }) => {
   const value = {
     state,
     setState,
-    activeOption,
-    setActiveOption
+    activePath,
+    setActivePath,
+    isActiveOption
   }
 
   return (
