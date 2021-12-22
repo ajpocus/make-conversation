@@ -4,7 +4,13 @@ export const DialogueContext = createContext({});
 
 export const DialogueContextProvider = ({ children }) => {
   const [state, setState] = useState({});
-  const [activeOption, setActiveOption] = useState(null);
+  const [activePath, setActivePath] = useState(null);
+
+  const isActiveOption = useCallback((keys) => {
+    return keys.every((key, idx) => {
+      return activePath[idx] === key;
+    });
+  }, [activePath]);
 
   const value = {
     state,

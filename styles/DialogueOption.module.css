@@ -1,0 +1,14 @@
+.dialogueOption {
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+}
+
+.activeOption {
+  composes: dialogueOption;
+  border: 1px solid #333;
+}
+
+.subOptions {
+  margin-left: 8px;
+}
