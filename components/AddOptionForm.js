@@ -14,14 +14,20 @@ const AddOptionForm = ({ keys }) => {
     
     let thisObj = stateCopy;
     for (let key of keys) {
+      if (!thisObj[key]) {
+        thisObj[key] = {};
+      }
+      
       thisObj = thisObj[key];
     }
 
     const optionKey = slugify(optionText);
 
-    thisObj[optionKey] = {
-      optionText
+    if (!thisObj.options) {
+      thisObj.options = {};
     }
+
+    thisObj.options[optionKey] = { optionText }
 
     setState(stateCopy);
     reset();

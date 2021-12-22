@@ -8,7 +8,7 @@ const DialogueOption = ({ optionName, option, keys, activeNPC }) => {
 
   const makeActive = useCallback(() => {
     setActivePath(keys);
-  }, [setActivePath, keys])
+  }, [setActivePath, keys]);
 
   const topClass = isActiveOption(keys) ? styles.activeOption : styles.dialogueOption;
 
