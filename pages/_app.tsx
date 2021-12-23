@@ -1,7 +1,9 @@
+import { AppProps } from "next/app"
+
 import { DialogueContextProvider } from "~/hooks/useDialogue"
 import "~/styles/globals.css"
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <DialogueContextProvider>
       <Component {...pageProps} />

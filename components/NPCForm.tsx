@@ -4,13 +4,13 @@ import { useForm } from "react-hook-form"
 import useDialogue from "~/hooks/useDialogue"
 
 const NPCForm = () => {
-  const { state, setState } = useDialogue();
+  const { tree, setTree } = useDialogue();
   const { register, handleSubmit, reset } = useForm();
 
   const addNPC = ({ name }) => {
     console.log("N", name)
-    setState({
-      ...state,
+    setTree({
+      ...tree,
       [name]: {}
     });
     reset();

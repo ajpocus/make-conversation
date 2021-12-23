@@ -6,25 +6,64 @@ import {
   useCallback
 } from "react";
 
-export const DialogueContext = createContext({});
+import "~/types"
+
+const initialTree: DialogueTree = {};
+const initialActivePath: Path = [];
+
+export const DialogueContext = createContext(...initialTree);
 
 export const DialogueContextProvider = ({ children }) => {
-  const [state, setState] = useState({});
-  const [activePath, setActivePath] = useState(null);
+  const [tree, setTree] = useState(...initialTree);
+  const [activePath, setActivePath] = useState(...initialActivePath);
+  const [activeNPC, setActiveNPC] = useState(null);
 
-  const isActiveOption = useCallback((keys) => {
+  const makeActive = useCallback((keys: Path): void => {
+    setActivePath(keys);
+  }, [setActivePath]);
+
+  const isActiveOption = useCallback((keys: Path): boolean => {
     return activePath?.length && keys.every((key, idx) => {
       return activePath[idx] === key;
     });
   }, [activePath]);
 
+  const addOption = useCallback((keys) => {
+    return ({ optionText }) => {
+      let treeCopy = { ...tree };
+      
+      let thisObj = treeCopy;
+      for (let key of keys) {
+        if (!thisObj[key]) {
+          thisObj[key] = {};
+        }
+        
+        thisObj = thisObj[key];
+      }
+
+      const optionKey = slugify(optionText);
+
+      if (!thisObj.options) {
+        thisObj.options = {};
+      }
+
+      thisObj.options[optionKey] = { optionText }
+
+      setTree(treeCopy);
+      reset();
+    };
+  }, [tree]);
+
   const value = {
-    state,
-    setState,
+    tree,
+    setTree,
     activePath,
     setActivePath,
+    activeNPC,
+    setActiveNPC,
+    makeActive,
     isActiveOption
-  }
+  };
 
   return (
     <DialogueContext.Provider value={value}>

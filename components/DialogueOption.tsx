@@ -4,17 +4,17 @@ import useDialogue from "~/hooks/useDialogue"
 import styles from "~/styles/DialogueOption.module.css"
 
 const DialogueOption = ({ optionName, option, keys, activeNPC }) => {
-  const { state, setState, activePath, setActivePath, isActiveOption } = useDialogue();
-
-  const makeActive = useCallback(() => {
-    setActivePath(keys);
-  }, [setActivePath, keys]);
+  const { isActiveOption, makeActive } = useDialogue();
 
   const topClass = isActiveOption(keys) ? styles.activeOption : styles.dialogueOption;
 
+  const clickHandler = useCallback(() => {
+    makeActive(keys)
+  }, [keys, makeActive]);
+
   return (
     <div className={topClass}>
-      <h3 className={styles.optionName} onClick={makeActive}>{optionName}</h3>
+      <h3 className={styles.optionName} onClick={clickHandler}>{optionName}</h3>
 
       <div className={styles.subOptions}>
         {option?.options && (

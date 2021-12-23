@@ -8,13 +8,12 @@ import DialogueTree from "~/components/DialogueTree"
 import styles from "~/styles/Home.module.css"
 
 export default function Home() {
-  const { state, setState } = useDialogue();
-  const [activeNPC, setActiveNPC] = useState(null);
+  const { tree, activeNPC, setActiveNPC } = useDialogue();
 
   const makeLua = useCallback(() => {
     // Code from https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
     // Licensed under CC-BY-SA 4.0
-    const fileContents = JSON.stringify(state, false, 2)
+    const fileContents = JSON.stringify(tree, false, 2)
       .replace(/"(\w+)":/g, "$1 =")
       .replace(/\[/g, "{")
       .replace(/\]/g, "}")
@@ -38,7 +37,7 @@ export default function Home() {
         window.URL.revokeObjectURL(url);  
       }, 0);
     }
-  }, [state]);
+  }, [tree]);
 
   return (
     <div className={styles.root}>
@@ -61,8 +60,8 @@ export default function Home() {
 
           <div className={styles.npcList}>
             {
-              state && Object.keys(state).length ? (
-                Object.entries(state).map(([npcName, npc]) => (
+              tree && Object.keys(tree).length ? (
+                Object.entries(tree).map(([npcName, npc]) => (
                   <div key={npcName} className={styles.npc} onClick={() => setActiveNPC(npcName)}>
                     {npcName}
                   </div>
@@ -78,7 +77,7 @@ export default function Home() {
           activeNPC ? (
             <DialogueTree activeNPC={activeNPC} />
           ) : (
-            state && Object.keys(state).length && (
+            tree && Object.keys(tree).length && (
               <p>Click an NPC to start</p>
             ) || null
           )
