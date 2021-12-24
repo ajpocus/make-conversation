@@ -5,7 +5,6 @@ import {
   useState,
   useCallback
 } from "react";
-import slugify from "slugify"
 
 import "~/types"
 
@@ -29,32 +28,6 @@ export const DialogueContextProvider = ({ children }) => {
     });
   }, [activePath]);
 
-  const addOption = useCallback((keys: Path, resetter: () => void) => {
-    return ({ optionText }) => {
-      let treeCopy = { ...tree };
-      
-      let thisObj = treeCopy;
-      for (let key of keys) {
-        if (!thisObj[key]) {
-          thisObj[key] = {};
-        }
-        
-        thisObj = thisObj[key];
-      }
-
-      const optionKey = slugify(optionText);
-
-      if (!thisObj.options) {
-        thisObj.options = {};
-      }
-
-      thisObj.options[optionKey] = { optionText }
-
-      setTree(treeCopy);
-      resetter();
-    };
-  }, [tree]);
-
   const value = {
     tree,
     setTree,
@@ -63,8 +36,7 @@ export const DialogueContextProvider = ({ children }) => {
     activeNPC,
     setActiveNPC,
     makeActive,
-    isActiveOption,
-    addOption
+    isActiveOption
   };
 
   return (
