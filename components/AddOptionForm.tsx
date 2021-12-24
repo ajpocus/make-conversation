@@ -8,7 +8,9 @@ const AddOptionForm = ({ keys }) => {
   const { register, handleSubmit, reset } = useForm();
   const { tree, setTree, activePath, addOption } = useDialogue();
 
-  const optionAdder = addOption(keys, reset);
+  const optionAdder = useCallback(() => {
+    addOption(keys, reset);
+  }, [keys, reset, addOption]);
 
   return (
     <div className={styles.formContainer}>
