@@ -75,7 +75,7 @@ export default function Home() {
 
         {
           activeNPC ? (
-            <DialogueTree activeNPC={activeNPC} />
+            <DialogueTree />
           ) : (
             tree && Object.keys(tree).length && (
               <p>Click an NPC to start</p>

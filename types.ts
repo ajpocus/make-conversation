@@ -14,6 +14,7 @@ export type Option = {
 export type Response = {
   responseType: ResponseType,
   text: string,
+  data: object,
   options: Options
 };
 

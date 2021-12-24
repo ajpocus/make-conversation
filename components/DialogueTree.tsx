@@ -3,8 +3,8 @@ import AddOptionForm from "~/components/AddOptionForm"
 import useDialogue from "~/hooks/useDialogue"
 import styles from "~/styles/DialogueTree.module.css"
 
-const DialogueTree = ({ activeNPC }) => {
-  const { tree, setTree, activePath } = useDialogue();
+const DialogueTree = () => {
+  const { tree, setTree, activePath, activeNPC } = useDialogue();
 
   const rootOptions = tree[activeNPC];
   const keys = activePath ? activePath : [activeNPC];
