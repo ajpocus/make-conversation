@@ -5,7 +5,7 @@ import slugify from "slugify"
 import useDialogue from "~/hooks/useDialogue"
 import styles from "~/styles/AddOptionForm.module.css"
 
-const AddOptionForm = ({ keys }) => {
+const AddOptionForm = ({ path }) => {
   const { register, handleSubmit, reset } = useForm();
   const { tree, setTree, activePath } = useDialogue();
 
@@ -13,12 +13,16 @@ const AddOptionForm = ({ keys }) => {
     let treeCopy = { ...tree };
     
     let thisObj = treeCopy;
-    for (let key of keys) {
+    for (let key of path) {
       if (!thisObj[key]) {
         thisObj[key] = {};
       }
-      
-      thisObj = thisObj[key];
+
+      if ("options" in thisObj) {
+        thisObj = thisObj.options[key]
+      } else {
+        thisObj = thisObj[key];
+      }
     }
 
     const optionKey = slugify(optionText);
@@ -31,7 +35,7 @@ const AddOptionForm = ({ keys }) => {
 
     setTree(treeCopy);
     reset();
-  }, [tree, setTree, reset, keys]);
+  }, [tree, setTree, reset, path]);
 
   return (
     <div className={styles.formContainer}>

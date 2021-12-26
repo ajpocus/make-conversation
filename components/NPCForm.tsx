@@ -8,7 +8,6 @@ const NPCForm = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const addNPC = ({ name }) => {
-    console.log("N", name)
     setTree({
       ...tree,
       [name]: {}
