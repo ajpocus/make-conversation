@@ -6,7 +6,7 @@ import styles from "~/styles/DialogueOption.module.css"
 const DialogueOption = ({ optionName, option, path, activeNPC }) => {
   const { isActiveOption, makeActive } = useDialogue();
 
-  const topClass = isActiveOption(keys) ? styles.activeOption : styles.dialogueOption;
+  const topClass = isActiveOption(path) ? styles.activeOption : styles.dialogueOption;
 
   const clickHandler = useCallback(() => {
     makeActive(path)

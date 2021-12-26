@@ -13,7 +13,7 @@ const AddOptionForm = ({ path }) => {
     let treeCopy = { ...tree };
     
     let thisObj = treeCopy;
-    for (let key of path) {
+    for (let key of activePath) {
       if (!thisObj[key]) {
         thisObj[key] = {};
       }
@@ -26,16 +26,11 @@ const AddOptionForm = ({ path }) => {
     }
 
     const optionKey = slugify(optionText);
-
-    if (!thisObj.options) {
-      thisObj.options = {};
-    }
-
-    thisObj.options[optionKey] = { optionText }
+    thisObj[optionKey] = { optionText }
 
     setTree(treeCopy);
     reset();
-  }, [tree, setTree, reset, path]);
+  }, [tree, setTree, reset, activePath]);
 
   return (
     <div className={styles.formContainer}>
