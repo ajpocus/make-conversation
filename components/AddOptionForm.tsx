@@ -26,7 +26,11 @@ const AddOptionForm = ({ path }) => {
     }
 
     const optionKey = slugify(text);
-    thisObj[optionKey] = { text }
+    if ("options" in thisObj) {
+      thisObj.options[optionKey] = { text }
+    } else {
+      thisObj[optionKey] = { text }
+    }  
 
     setTree(treeCopy);
     reset();
