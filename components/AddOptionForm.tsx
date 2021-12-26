@@ -9,7 +9,7 @@ const AddOptionForm = ({ path }) => {
   const { register, handleSubmit, reset } = useForm();
   const { tree, setTree, activePath } = useDialogue();
 
-  const addOption = useCallback(({ optionText }) => {
+  const addOption = useCallback(({ text }) => {
     let treeCopy = { ...tree };
     
     let thisObj = treeCopy;
@@ -25,8 +25,8 @@ const AddOptionForm = ({ path }) => {
       }
     }
 
-    const optionKey = slugify(optionText);
-    thisObj[optionKey] = { optionText }
+    const optionKey = slugify(text);
+    thisObj[optionKey] = { text }
 
     setTree(treeCopy);
     reset();
@@ -35,7 +35,7 @@ const AddOptionForm = ({ path }) => {
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit(addOption)}>
-        <input {...register("optionText")} />
+        <input {...register("text")} />
         <button type="submit">Add option</button>
       </form>
     </div>
