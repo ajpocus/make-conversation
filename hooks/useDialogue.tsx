@@ -28,6 +28,13 @@ export const DialogueContextProvider = ({ children }) => {
     });
   }, [activePath]);
 
+  const addNPC = useCallback(({ name }) => {
+    setTree({
+      ...tree,
+      [name]: {}
+    });
+  }, [tree, setTree]);
+
   const value = {
     tree,
     setTree,
@@ -36,7 +43,8 @@ export const DialogueContextProvider = ({ children }) => {
     activeNPC,
     setActiveNPC,
     makeActive,
-    isActiveOption
+    isActiveOption,
+    addNPC
   };
 
   return (

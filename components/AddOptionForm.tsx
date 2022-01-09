@@ -18,7 +18,7 @@ const AddOptionForm = ({ path }) => {
         thisObj[key] = {};
       }
 
-      if ("options" in thisObj) {
+      if (thisObj.hasOwnProperty("options")) {
         thisObj = thisObj.options[key]
       } else {
         thisObj = thisObj[key];
