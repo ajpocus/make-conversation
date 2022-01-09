@@ -14,14 +14,14 @@ const DialogueOption = ({ optionName, option, path, activeNPC }) => {
 
   return (
     <div className={topClass}>
-      <h3 className={styles.optionName} onClick={clickHandler}>{optionName}</h3>
+      <h3 className={styles.optionName} onClick={clickHandler}>{option.text}</h3>
 
       <div className={styles.subOptions}>
         {option?.options && (
           Object.entries(option.options).map(([subOptionName, subOption]) => {
             <DialogueOption
               key={optionKey}
-              path={[...path, subOptionName]}
+              path={[...path, "options", subOption.name]}
               optionName={subOptionName}
               option={subOption}
             />

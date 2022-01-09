@@ -15,14 +15,14 @@ const DialogueTree = () => {
         {activeNPC}
       </h2>
 
-      <AddOptionForm path={path} />
+      <AddOptionForm />
 
       {rootOptions && Object.entries(rootOptions).map(([optionName, option]) => (
         <DialogueOption 
           key={optionName}
           optionName={optionName}
           option={option}
-          path={[activeNPC, optionName]}
+          path={[activeNPC, option.name]}
         />
       )) || null}
     </div>
