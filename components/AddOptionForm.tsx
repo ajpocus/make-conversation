@@ -14,7 +14,6 @@ const AddOptionForm = () => {
     let treeCopy = { ...tree };
     const optionKey = slugify(text);
     const newPath = [...activePath, "options", optionKey];
-    console.log("NEW PATH", newPath)
     const val = { text };
     set(treeCopy, newPath, val);
     setTree(treeCopy);

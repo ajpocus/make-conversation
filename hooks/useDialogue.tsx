@@ -22,13 +22,9 @@ export const DialogueContextProvider = ({ children }) => {
     if (activePath[0] === activeNPC) {
       return;
     }
-    
+
     setActivePath([activeNPC, ...activePath.slice(1)])
   }, [activeNPC, activePath]);
-
-  const makeActive = useCallback((path: Path): void => {
-    setActivePath(path);
-  }, [setActivePath]);
 
   const isActiveOption = useCallback((path: Path): boolean => {
     return activePath?.length && path.every((key, idx) => {
@@ -50,7 +46,6 @@ export const DialogueContextProvider = ({ children }) => {
     setActivePath,
     activeNPC,
     setActiveNPC,
-    makeActive,
     isActiveOption,
     addNPC
   };
