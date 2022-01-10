@@ -4,13 +4,14 @@ import useDialogue from "~/hooks/useDialogue"
 import styles from "~/styles/DialogueOption.module.css"
 
 const DialogueOption = ({ optionName, option, path, activeNPC }) => {
-  const { isActiveOption, makeActive } = useDialogue();
+  const { isActiveOption, activePath, setActivePath } = useDialogue();
 
   const topClass = isActiveOption(path) ? styles.activeOption : styles.dialogueOption;
 
   const clickHandler = useCallback(() => {
-    makeActive([...path, optionName])
-  }, [path, makeActive, optionName]);
+    console.log("Setting active path as", path)
+    setActivePath(path)
+  }, [path, setActivePath]);
 
   return (
     <div className={topClass}>
@@ -18,15 +19,15 @@ const DialogueOption = ({ optionName, option, path, activeNPC }) => {
 
       <div className={styles.subOptions}>
         {option?.options && (
-          Object.entries(option.options).map(([subOptionName, subOption]) => {
+          Object.entries(option.options).map(([subOptionName, subOption]) => (
             <DialogueOption
-              key={optionKey}
-              path={[...path, subOptionName]}
+              key={subOptionName}
+              path={[...path, "options", subOptionName]}
               optionName={subOptionName}
               option={subOption}
             />
-          })
-        ) || null}
+          ))
+        )}
       </div>
     </div>
   );

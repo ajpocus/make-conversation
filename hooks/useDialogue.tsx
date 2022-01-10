@@ -18,15 +18,26 @@ export const DialogueContextProvider = ({ children }) => {
   const [activePath, setActivePath] = useState([...initialActivePath]);
   const [activeNPC, setActiveNPC] = useState(null);
 
-  const makeActive = useCallback((path: Path): void => {
-    setActivePath(path);
-  }, [setActivePath]);
+  useEffect(() => {
+    if (activePath[0] === activeNPC) {
+      return;
+    }
+
+    setActivePath([activeNPC, ...activePath.slice(1)])
+  }, [activeNPC, activePath]);
 
   const isActiveOption = useCallback((path: Path): boolean => {
     return activePath?.length && path.every((key, idx) => {
       return activePath[idx] === key;
     });
   }, [activePath]);
+
+  const addNPC = useCallback(({ name }) => {
+    setTree({
+      ...tree,
+      [name]: {}
+    });
+  }, [tree, setTree]);
 
   const value = {
     tree,
@@ -35,8 +46,8 @@ export const DialogueContextProvider = ({ children }) => {
     setActivePath,
     activeNPC,
     setActiveNPC,
-    makeActive,
-    isActiveOption
+    isActiveOption,
+    addNPC
   };
 
   return (
