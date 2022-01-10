@@ -9,7 +9,7 @@ const DialogueOption = ({ optionName, option, path, activeNPC }) => {
   const topClass = isActiveOption(path) ? styles.activeOption : styles.dialogueOption;
 
   const clickHandler = useCallback(() => {
-    makeActive([...activePath, optionName])
+    makeActive([...activePath, "options", optionName])
   }, [activePath, makeActive, optionName]);
 
   return (
@@ -20,7 +20,7 @@ const DialogueOption = ({ optionName, option, path, activeNPC }) => {
         {option?.options && (
           Object.entries(option.options).map(([subOptionName, subOption]) => {
             <DialogueOption
-              key={optionKey}
+              key={subOptionName}
               path={[...path, "options", subOptionName]}
               optionName={subOptionName}
               option={subOption}
