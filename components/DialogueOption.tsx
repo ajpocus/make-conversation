@@ -1,7 +1,7 @@
-import { useCallback } from "react"
+import { useCallback } from "react";
 
-import useDialogue from "~/hooks/useDialogue"
-import styles from "~/styles/DialogueOption.module.css"
+import useDialogue from "~/hooks/useDialogue";
+import styles from "~/styles/DialogueOption.module.css";
 
 const DialogueOption = ({ optionName, option, path, activeNPC }) => {
   const { isActiveOption, activePath, setActivePath } = useDialogue();
@@ -33,4 +33,4 @@ const DialogueOption = ({ optionName, option, path, activeNPC }) => {
   );
 };
 
-export default DialogueOption
+export default DialogueOption;

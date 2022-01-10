@@ -1,19 +1,19 @@
-import { useState, useCallback, useEffect } from "react"
-import Head from "next/head"
-import Image from "next/image"
+import { useState, useCallback, useEffect } from "react";
+import Head from "next/head";
+import Image from "next/image";
 
-import useDialogue from "~/hooks/useDialogue"
-import NPCForm from "~/components/NPCForm"
-import DialogueTree from "~/components/DialogueTree"
-import styles from "~/styles/Home.module.css"
+import useDialogue from "~/hooks/useDialogue";
+import NPCForm from "~/components/NPCForm";
+import DialogueTree from "~/components/DialogueTree";
+import styles from "~/styles/Home.module.css";
 
 export default function Home() {
-  const { tree, activeNPC, setActiveNPC } = useDialogue();
+  const { NPCs, activeNPC, setActiveNPC } = useDialogue();
 
   const makeLua = useCallback(() => {
     // Code from https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
     // Licensed under CC-BY-SA 4.0
-    const fileContents = JSON.stringify(tree, false, 2)
+    const fileContents = JSON.stringify(NPCs, false, 2)
       .replace(/"(\w+)":/g, "$1 =")
       .replace(/\[/g, "{")
       .replace(/\]/g, "}")
@@ -37,7 +37,7 @@ export default function Home() {
         window.URL.revokeObjectURL(url);  
       }, 0);
     }
-  }, [tree]);
+  }, [NPCs]);
 
   return (
     <div className={styles.root}>

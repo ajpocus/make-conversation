@@ -1,7 +1,7 @@
-import { useEffect, useCallback } from "react"
-import { useForm } from "react-hook-form"
+import { useEffect, useCallback } from "react";
+import { useForm } from "react-hook-form";
 
-import useDialogue from "~/hooks/useDialogue"
+import useDialogue from "~/hooks/useDialogue";
 
 const NPCForm = () => {
   const { tree, setTree, addNPC } = useDialogue();
@@ -22,4 +22,4 @@ const NPCForm = () => {
   );
 };
 
-export default NPCForm
+export default NPCForm;

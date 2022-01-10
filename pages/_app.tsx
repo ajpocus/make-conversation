@@ -1,7 +1,7 @@
-import { AppProps } from "next/app"
+import { AppProps } from "next/app";
 
-import { DialogueContextProvider } from "~/hooks/useDialogue"
-import "~/styles/globals.css"
+import { DialogueContextProvider } from "~/hooks/useDialogue";
+import "~/styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,4 +11,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp
+export default MyApp;

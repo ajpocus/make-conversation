@@ -5,49 +5,39 @@ import {
   useState,
   useCallback
 } from "react";
+import cuid from "cuid";
 
-import "~/types"
+import "~/types";
 
-const initialTree: DialogueTree = {};
-const initialActivePath: Path = [];
+const initialNPCs: NPCList = {};
 
-export const DialogueContext = createContext({...initialTree });
+export const DialogueContext = createContext({ ...initialNPCs });
 
 export const DialogueContextProvider = ({ children }) => {
-  const [tree, setTree] = useState({ ...initialTree });
-  const [activePath, setActivePath] = useState([...initialActivePath]);
+  const [NPCs, setNPCs] = useState({ ...initialNPCs });
   const [activeNPC, setActiveNPC] = useState(null);
 
-  useEffect(() => {
-    if (activePath[0] === activeNPC) {
-      return;
-    }
-
-    setActivePath([activeNPC, ...activePath.slice(1)])
-  }, [activeNPC, activePath]);
-
-  const isActiveOption = useCallback((path: Path): boolean => {
-    return activePath?.length && path.every((key, idx) => {
-      return activePath[idx] === key;
+  const addNPC = useCallback(({ name, text }) => {
+    setNPCs({
+      ...NPCs,
+      [name]: { text }
     });
-  }, [activePath]);
+  }, [NPCs, setNPCs]);
 
-  const addNPC = useCallback(({ name }) => {
-    setTree({
-      ...tree,
-      [name]: {}
-    });
-  }, [tree, setTree]);
+  const addOption = useCallback(({ parentID, text }) => {
+    let NPCCopy = { ...NPCs };
+    const id = cuid();
+    NPCCopy[activeNPC][parent] = { id, text };
+    setNPCs(NPCCopy);
+  }, [NPCs, setNPCs, activeNPC])
 
   const value = {
-    tree,
-    setTree,
-    activePath,
-    setActivePath,
+    NPCs,
+    setNPCs,
     activeNPC,
     setActiveNPC,
-    isActiveOption,
-    addNPC
+    addNPC,
+    addOption
   };
 
   return (

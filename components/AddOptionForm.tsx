@@ -1,6 +1,6 @@
-import { useCallback } from "react"
-import { useForm } from "react-hook-form"
-import slugify from "slugify"
+import { useCallback } from "react";
+import { useForm } from "react-hook-form";
+import slugify from "slugify";
 import set from "lodash/set";
 
 import useDialogue from "~/hooks/useDialogue";
@@ -8,14 +8,14 @@ import styles from "~/styles/AddOptionForm.module.css";
 
 const AddOptionForm = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { tree, setTree, activePath } = useDialogue();
+  const { NPCs, setNPCs, activePath } = useDialogue();
 
   const addOption = useCallback(({ text }) => {
-    let treeCopy = { ...tree };
+    let NPCCopy = { ...NPCs };
     const optionKey = slugify(text);
     const newPath = [...activePath, "options", optionKey];
     const val = { text };
-    set(treeCopy, newPath, val);
+    set(NPCCopy, newPath, val);
     setTree(treeCopy);
     reset();
   }, [tree, setTree, reset, activePath]);
@@ -30,4 +30,4 @@ const AddOptionForm = () => {
   );
 };
 
-export default AddOptionForm
+export default AddOptionForm;

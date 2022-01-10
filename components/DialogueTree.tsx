@@ -1,7 +1,7 @@
-import DialogueOption from "~/components/DialogueOption"
-import AddOptionForm from "~/components/AddOptionForm"
-import useDialogue from "~/hooks/useDialogue"
-import styles from "~/styles/DialogueTree.module.css"
+import DialogueOption from "~/components/DialogueOption";
+import AddOptionForm from "~/components/AddOptionForm";
+import useDialogue from "~/hooks/useDialogue";
+import styles from "~/styles/DialogueTree.module.css";
 
 const DialogueTree = () => {
   const { tree, setTree, activePath, activeNPC } = useDialogue();
@@ -29,4 +29,4 @@ const DialogueTree = () => {
   );
 };
 
-export default DialogueTree
+export default DialogueTree;

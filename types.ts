@@ -1,23 +1,17 @@
-export type DialogueTree = {
-  [npc: string]: Options
+export type Path = Array<string>;
+export type OptionID = string;
+export type NPCID = string;
+
+export type NPCList = {
+  [key: NPCID]: NPC
 };
 
-export type Options = {
-  [optionKey: string]: Option
+export type NPC = {
+  [key: OptionID]: Option
 };
 
 export type Option = {
+  id: OptionID,
   text: string,
-  response: Response
+  response: Array<OptionID> 
 };
-
-export type Response = {
-  responseType: ResponseType,
-  text: string,
-  data: object,
-  options: Options
-};
-
-export type ResponseType = "text" | "item" | "quest";
-
-export type Path = Array<string>;
