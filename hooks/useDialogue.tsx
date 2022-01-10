@@ -17,10 +17,12 @@ export const DialogueContextProvider = ({ children }) => {
   const [NPCs, setNPCs] = useState({ ...initialNPCs });
   const [activeNPC, setActiveNPC] = useState(null);
 
-  const addNPC = useCallback(({ name, text }) => {
+  const addNPC = useCallback(({ name }) => {
+    const id = cuid();
+
     setNPCs({
       ...NPCs,
-      [name]: {}
+      [id]: { id, name }
     });
   }, [NPCs, setNPCs]);
 
