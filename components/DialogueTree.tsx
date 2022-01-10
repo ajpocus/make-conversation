@@ -4,10 +4,9 @@ import useDialogue from "~/hooks/useDialogue";
 import styles from "~/styles/DialogueTree.module.css";
 
 const DialogueTree = () => {
-  const { tree, setTree, activePath, activeNPC } = useDialogue();
+  const { NPCs, setNPCs, activeNPC } = useDialogue();
 
-  const rootOptions = tree[activeNPC];
-  const path = activePath ? activePath : [activeNPC];
+  const options = NPCs[activeNPC];
 
   return (
     <div className={styles.dialogueTree}>
@@ -15,14 +14,17 @@ const DialogueTree = () => {
         {activeNPC}
       </h2>
 
+      {activeNPC && (
+        <p>
+          Add option to {activeNPC}
+        </p>
+      )}
       <AddOptionForm />
 
-      {rootOptions?.options && Object.entries(rootOptions?.options).map(([optionName, option]) => (
+      {options && Object.entries(options).map(([optionKey, option]) => (
         <DialogueOption 
-          key={optionName}
-          optionName={optionName}
+          key={optionKey}
           option={option}
-          path={[...activePath, "options", optionName]}
         />
       ))}
     </div>

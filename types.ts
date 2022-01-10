@@ -7,6 +7,8 @@ export type NPCList = {
 };
 
 export type NPC = {
+  id: NPCID,
+  name: string,
   [key: OptionID]: Option
 };
 

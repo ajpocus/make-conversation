@@ -10,7 +10,7 @@ const AddOptionForm = () => {
   const { register, handleSubmit, reset } = useForm();
   const { NPCs, setNPCs, activePath } = useDialogue();
 
-  const addOption = useCallback(({ text }) => {
+  const submitHandler = useCallback(({ text }) => {
     let NPCCopy = { ...NPCs };
     const optionKey = slugify(text);
     const newPath = [...activePath, "options", optionKey];

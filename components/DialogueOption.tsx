@@ -3,15 +3,14 @@ import { useCallback } from "react";
 import useDialogue from "~/hooks/useDialogue";
 import styles from "~/styles/DialogueOption.module.css";
 
-const DialogueOption = ({ optionName, option, path, activeNPC }) => {
-  const { isActiveOption, activePath, setActivePath } = useDialogue();
+const DialogueOption = ({ option, path }) => {
+  const { activeNPC } = useDialogue();
 
   const topClass = isActiveOption(path) ? styles.activeOption : styles.dialogueOption;
 
   const clickHandler = useCallback(() => {
-    console.log("Setting active path as", path)
-    setActivePath(path)
-  }, [path, setActivePath]);
+    addOption({ })
+  }, []);
 
   return (
     <div className={topClass}>

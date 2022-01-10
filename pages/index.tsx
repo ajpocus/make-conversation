@@ -60,10 +60,10 @@ export default function Home() {
 
           <div className={styles.npcList}>
             {
-              tree && Object.keys(tree).length ? (
-                Object.entries(tree).map(([npcName, npc]) => (
-                  <div key={npcName} className={styles.npc} onClick={() => setActiveNPC(npcName)}>
-                    {npcName}
+              NPCs && Object.keys(NPCs).length ? (
+                Object.entries(NPCs).map(([npcID, npc]) => (
+                  <div key={npcID} className={styles.npc} onClick={() => setActiveNPC(npcID)}>
+                    {npc.name}
                   </div>
                 ))
               ) : (
@@ -77,15 +77,13 @@ export default function Home() {
           activeNPC ? (
             <DialogueTree />
           ) : (
-            tree && Object.keys(tree).length && (
-              <p>Click an NPC to start</p>
-            )
+            <p>Click an NPC to start</p>
           )
         }
       </main>
 
       <footer className={styles.footer}>
-        &copy; Copyright 2021 Austin Pocus
+        &copy; Copyright 2022 Austin Pocus
       </footer>
     </div>
   )

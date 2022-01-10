@@ -20,7 +20,7 @@ export const DialogueContextProvider = ({ children }) => {
   const addNPC = useCallback(({ name, text }) => {
     setNPCs({
       ...NPCs,
-      [name]: { text }
+      [name]: {}
     });
   }, [NPCs, setNPCs]);
 
