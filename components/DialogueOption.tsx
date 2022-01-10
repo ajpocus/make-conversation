@@ -18,14 +18,14 @@ const DialogueOption = ({ optionName, option, path, activeNPC }) => {
 
       <div className={styles.subOptions}>
         {option?.options && (
-          Object.entries(option.options).map(([subOptionName, subOption]) => {
+          Object.entries(option.options).map(([subOptionName, subOption]) => (
             <DialogueOption
               key={subOptionName}
               path={[...path, "options", subOptionName]}
               optionName={subOptionName}
               option={subOption}
             />
-          })
+          ))
         )}
       </div>
     </div>
