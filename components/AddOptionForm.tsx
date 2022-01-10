@@ -12,17 +12,15 @@ const AddOptionForm = () => {
 
   const submitHandler = useCallback(({ text }) => {
     let NPCCopy = { ...NPCs };
-    const optionKey = slugify(text);
-    const newPath = [...activePath, "options", optionKey];
-    const val = { text };
-    set(NPCCopy, newPath, val);
-    setTree(treeCopy);
+    let activeObject = NPCCopy[activeNPC]
+    NPCCopy[activeNPC].options[activeOption]
+    setNPCs(NPCCopy);
     reset();
-  }, [tree, setTree, reset, activePath]);
+  }, [NPCs, setNPCs, reset]);
 
   return (
     <div className={styles.formContainer}>
-      <form onSubmit={handleSubmit(addOption)}>
+      <form onSubmit={handleSubmit(submitHandler)}>
         <input {...register("text")} />
         <button type="submit">Add option</button>
       </form>
