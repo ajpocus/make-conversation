@@ -9,6 +9,7 @@ const DialogueOption = ({ optionName, option, path, activeNPC }) => {
   const topClass = isActiveOption(path) ? styles.activeOption : styles.dialogueOption;
 
   const clickHandler = useCallback(() => {
+    console.log("PATH", path)
     makeActive(path)
   }, [path, makeActive]);
 
