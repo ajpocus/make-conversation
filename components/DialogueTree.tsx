@@ -17,12 +17,12 @@ const DialogueTree = () => {
 
       <AddOptionForm />
 
-      {rootOptions && Object.entries(rootOptions).map(([optionName, option]) => (
+      {rootOptions?.options && Object.entries(rootOptions?.options).map(([optionName, option]) => (
         <DialogueOption 
           key={optionName}
           optionName={optionName}
           option={option}
-          path={[...activePath, option.name]}
+          path={[...activePath, "options", optionName]}
         />
       )) || null}
     </div>
