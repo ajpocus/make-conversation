@@ -22,7 +22,7 @@ const DialogueTree = () => {
           key={optionName}
           optionName={optionName}
           option={option}
-          path={[activeNPC, option.name]}
+          path={[...activePath, option.name]}
         />
       )) || null}
     </div>

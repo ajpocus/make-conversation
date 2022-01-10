@@ -18,6 +18,14 @@ export const DialogueContextProvider = ({ children }) => {
   const [activePath, setActivePath] = useState([...initialActivePath]);
   const [activeNPC, setActiveNPC] = useState(null);
 
+  useEffect(() => {
+    if (activePath[0] === activeNPC) {
+      return;
+    }
+    
+    setActivePath([activeNPC, ...activePath.slice(1)])
+  }, [activeNPC, activePath]);
+
   const makeActive = useCallback((path: Path): void => {
     setActivePath(path);
   }, [setActivePath]);
