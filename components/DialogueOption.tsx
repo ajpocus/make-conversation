@@ -26,7 +26,7 @@ const DialogueOption = ({ optionName, option, path, activeNPC }) => {
               option={subOption}
             />
           })
-        ) || null}
+        )}
       </div>
     </div>
   );

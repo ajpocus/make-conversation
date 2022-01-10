@@ -24,7 +24,7 @@ const DialogueTree = () => {
           option={option}
           path={[...activePath, "options", optionName]}
         />
-      )) || null}
+      ))}
     </div>
   );
 };

@@ -79,7 +79,7 @@ export default function Home() {
           ) : (
             tree && Object.keys(tree).length && (
               <p>Click an NPC to start</p>
-            ) || null
+            )
           )
         }
       </main>
