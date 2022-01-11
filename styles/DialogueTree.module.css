@@ -1,4 +1,8 @@
 .dialogueTree {
   display: flex;
+}
+
+.mainOptions {
+  display: flex;
   flex-direction: column;
 }
