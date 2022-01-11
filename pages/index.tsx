@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import Head from "next/head";
+import Link from "next/link";
 import Image from "next/image";
 
 import useDialogue from "~/hooks/useDialogue";
@@ -48,10 +49,14 @@ export default function Home() {
       </Head>
 
       <header className={styles.header}>
-        <h1 className={styles.title}>
-          make-conversation
-        </h1>
-        <button className={styles.downloadBtn} onClick={makeLua}>Download</button>
+        <Link href="/">
+          <a>
+            <h1 className="text-3xl font-bold underline">
+              make-conversation
+            </h1>
+          </a>
+        </Link>
+        <button className="btn" onClick={makeLua}>Download</button>
       </header>
 
       <main className={styles.main}>
