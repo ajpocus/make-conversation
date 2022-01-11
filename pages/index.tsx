@@ -14,7 +14,7 @@ export default function Home() {
   const makeLua = useCallback(() => {
     // Code from https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
     // Licensed under CC-BY-SA 4.0
-    const fileContents = JSON.stringify(NPCs, false, 2)
+    const fileContents = "return " + JSON.stringify(NPCs, false, 2)
       .replace(/"(\w+)":/g, "$1 =")
       .replace(/\[/g, "{")
       .replace(/\]/g, "}")
