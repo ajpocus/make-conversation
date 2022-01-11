@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import useDialogue from "~/hooks/useDialogue";
 
 const NPCForm = () => {
-  const { tree, setTree, addNPC } = useDialogue();
+  const { addNPC } = useDialogue();
   const { register, handleSubmit, reset } = useForm();
 
   const submitHandler = useCallback(({ name }) => {
