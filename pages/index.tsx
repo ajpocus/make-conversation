@@ -39,7 +39,7 @@ export default function Home() {
         window.URL.revokeObjectURL(url);  
       }, 0);
     }
-  }, [NPCs]);
+  }, [NPCs, options]);
 
   return (
     <div className={styles.root}>
