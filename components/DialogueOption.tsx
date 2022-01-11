@@ -21,7 +21,6 @@ const DialogueOption = ({ option, path }) => {
           Object.entries(option.responses).map(([subOptionName, subOption]) => (
             <DialogueOption
               key={subOptionName}
-              path={[...path, "options", subOptionName]}
               optionName={subOptionName}
               option={subOption}
             />

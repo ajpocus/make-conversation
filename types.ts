@@ -12,13 +12,9 @@ export type NPC = {
   options: Array<OptionId>
 };
 
-export type Options = {
+export type OptionList = {
   [key: OptionID]: Option
 };
-
-export type OptionMap = {
-  [key: OptionID]: Option
-}
 
 export type Option = {
   id: OptionID,
