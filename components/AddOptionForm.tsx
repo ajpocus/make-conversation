@@ -8,12 +8,21 @@ import styles from "~/styles/AddOptionForm.module.css";
 
 const AddOptionForm = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { options, setOptions, NPCs, setNPCs, activeNPC } = useDialogue();
+  const { options, setOptions, NPCs, setNPCs, activeNPC, activeOption } = useDialogue();
 
   const submitHandler = useCallback(({ text }) => {
     let optionsCopy = { ...options };
     let id = cuid();
     optionsCopy[id] = { id, text };
+
+    if (activeOption) {
+      let opt = optionsCopy[activeOption];
+      if (opt.responses) {
+        opt.responses.push(id);
+      } else {
+        opt.responses = [id];
+      }
+    }
 
     let NPCCopy = { ...NPCs };
     let npc = NPCCopy[activeNPC];
@@ -27,7 +36,7 @@ const AddOptionForm = () => {
     setNPCs(NPCCopy)
 
     reset();
-  }, [options, setOptions, reset, NPCs, setNPCs, activeNPC]);
+  }, [options, setOptions, reset, NPCs, setNPCs, activeNPC, activeOption]);
 
   return (
     <div className={styles.formContainer}>

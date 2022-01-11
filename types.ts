@@ -19,5 +19,5 @@ export type OptionList = {
 export type Option = {
   id: OptionID,
   text: string,
-  response: Array<OptionID> 
+  responses: Array<OptionID> 
 };
