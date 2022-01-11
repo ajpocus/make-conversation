@@ -3,11 +3,23 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Spline Sans", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Montserrat", serif;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2.4em;
+}
+
+h3 {
+  font-size: 1.8em;
 }
 
 a {
@@ -24,5 +36,9 @@ button {
   background: transparent;
   box-shadow: none;
   border: 1px solid #333;
-  padding: 3px 8px;
+  padding: 5px 10px;
+}
+
+input {
+  padding: 4px;
 }
