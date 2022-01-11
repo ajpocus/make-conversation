@@ -7,7 +7,7 @@ const DialogueTree = () => {
   const { NPCs, setNPCs, activeNPC, options } = useDialogue();
 
   const npc = NPCs[activeNPC]
-  const optionList = options[activeNPC];
+  const optionList = npc.options?.map((optionID) => options[optionID]);
 
   return (
     <div className={styles.dialogueTree}>
@@ -22,9 +22,9 @@ const DialogueTree = () => {
       )}
       <AddOptionForm />
 
-      {optionList && Object.entries(optionList).map(([optionKey, option]) => (
+      {optionList && optionList.map((option) => (
         <DialogueOption 
-          key={optionKey}
+          key={option.id}
           option={option}
         />
       ))}
