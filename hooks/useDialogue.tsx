@@ -28,13 +28,6 @@ export const DialogueContextProvider = ({ children }) => {
     });
   }, [NPCs, setNPCs]);
 
-  const addOption = useCallback(({ parentID, text }) => {
-    let NPCCopy = { ...NPCs };
-    const id = cuid();
-    NPCCopy[activeNPC][parent] = { id, text };
-    setNPCs(NPCCopy);
-  }, [NPCs, setNPCs, activeNPC])
-
   const value = {
     NPCs,
     setNPCs,
@@ -44,8 +37,7 @@ export const DialogueContextProvider = ({ children }) => {
     setOptions,
     activeOption,
     setActiveOption,
-    addNPC,
-    addOption
+    addNPC
   };
 
   return (
