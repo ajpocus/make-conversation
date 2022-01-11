@@ -9,7 +9,11 @@ export type NPCList = {
 export type NPC = {
   id: NPCID,
   name: string,
-  options: OptionMap
+  options: Array<OptionId>
+};
+
+export type Options = {
+  [key: OptionID]: Option
 };
 
 export type OptionMap = {

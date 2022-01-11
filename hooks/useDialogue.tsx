@@ -15,7 +15,9 @@ export const DialogueContext = createContext({ ...initialNPCs });
 
 export const DialogueContextProvider = ({ children }) => {
   const [NPCs, setNPCs] = useState({ ...initialNPCs });
+  const [options, setOptions] = useState({});
   const [activeNPC, setActiveNPC] = useState(null);
+  const [activeOption, setActiveOption] = useState(null);
 
   const addNPC = useCallback(({ name }) => {
     const id = cuid();
@@ -37,7 +39,11 @@ export const DialogueContextProvider = ({ children }) => {
     NPCs,
     setNPCs,
     activeNPC,
+    options,
+    setOptions,
     setActiveNPC,
+    activeOption,
+    setActiveOption,
     addNPC,
     addOption
   };
