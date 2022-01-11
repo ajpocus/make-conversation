@@ -9,12 +9,13 @@ import DialogueTree from "~/components/DialogueTree";
 import styles from "~/styles/Home.module.css";
 
 export default function Home() {
-  const { NPCs, activeNPC, setActiveNPC } = useDialogue();
+  const { NPCs, activeNPC, setActiveNPC, options } = useDialogue();
 
   const makeLua = useCallback(() => {
     // Code from https://stackoverflow.com/questions/13405129/javascript-create-and-save-file
     // Licensed under CC-BY-SA 4.0
-    const fileContents = "return " + JSON.stringify(NPCs, false, 2)
+    const finalData = { npcs: NPCs, options };
+    const fileContents = "return " + JSON.stringify(finalData, false, 2)
       .replace(/"(\w+)":/g, "$1 =")
       .replace(/\[/g, "{")
       .replace(/\]/g, "}")
