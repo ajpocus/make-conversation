@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 import useDialogue from "~/hooks/useDialogue";
 import NPCForm from "~/components/NPCForm";
@@ -51,12 +51,12 @@ export default function Home() {
       <header className={styles.header}>
         <Link href="/">
           <a>
-            <h1 className="text-3xl font-bold underline">
+            <h1 className={styles.title}>
               make-conversation
             </h1>
           </a>
         </Link>
-        <button className="btn" onClick={makeLua}>Download</button>
+        <button className={styles.downloadBtn} onClick={makeLua}>Download</button>
       </header>
 
       <main className={styles.main}>
